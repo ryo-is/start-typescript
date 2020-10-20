@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:9-alpine
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - "db.data:/var/lib/postgresql/data"
+    ports:
+      - "5433:5432"
+    tty: true
+volumes:
+  db.data:
+    external: true
+networks:
+  default:
+    external:
+      name: docker-network
