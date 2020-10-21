@@ -1,9 +1,10 @@
 import { Router } from 'express';
 import { DBAccessor } from './dbAccessor';
 
+const dbAccessor = new DBAccessor();
+
 export const createRouter = () => {
   const router = Router();
-  const dbAccessor = new DBAccessor();
 
   // Read
   router.get('/', async (req, res) => {
@@ -19,7 +20,10 @@ export const createRouter = () => {
   // Create
   router.put('/', async (req, res) => {
     try {
-      await dbAccessor.create();
+      if (!req.body.title) {
+        res.status(400).send({ message: 'title required' });
+      }
+      await dbAccessor.create(req.body.title);
       res.status(200).send({ message: 'create success' });
     } catch (err) {
       console.error(err);
@@ -29,6 +33,8 @@ export const createRouter = () => {
 
   // Update
   router.post('/:taskID', (req, res) => {
+    console.log(req.params);
+    console.log(req.body);
     res.status(200).send({ message: 'hello, world' });
   });
 
