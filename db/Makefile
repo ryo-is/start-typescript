@@ -6,3 +6,6 @@ initv:
 
 up-db:
 	docker-compose -f ./docker-compose.db.yml up -d
+
+down-db:
+	docker-compose -f ./docker-compose.db.yml down
