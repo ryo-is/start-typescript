@@ -15,7 +15,8 @@ module.exports = (sequelize, DataTypes) => {
   };
   TodoTask.init({
     uuid: DataTypes.UUID,
-    title: DataTypes.STRING
+    title: DataTypes.STRING,
+    status: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'TodoTask',
