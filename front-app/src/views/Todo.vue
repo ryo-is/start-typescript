@@ -31,10 +31,6 @@ export default defineComponent({
     const state = reactive({
       title: '',
     });
-    const todos = async () => {
-      const res = await axios.get(baseURL);
-      console.log(res);
-    };
 
     const create = async () => {
       await axios.put(baseURL, { title: state.title });
@@ -42,7 +38,6 @@ export default defineComponent({
 
     return {
       state,
-      todos,
       create,
     };
   },
