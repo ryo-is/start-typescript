@@ -32,15 +32,31 @@ export const createRouter = () => {
   });
 
   // Update
-  router.post('/:taskID', (req, res) => {
-    console.log(req.params);
-    console.log(req.body);
-    res.status(200).send({ message: 'hello, world' });
+  router.post('/:taskID', async (req, res) => {
+    try {
+      if (!req.body) {
+        res.status(400).send({ message: 'body required' });
+      }
+      await dbAccessor.update({ uuid: req.params.taskID, ...req.body });
+      res.status(200).send({ message: 'update success' });
+    } catch (err) {
+      console.error(err);
+      res.status(400).send({ message: 'update failed' });
+    }
   });
 
   // Delete
-  router.delete('/:taskID', (req, res) => {
-    res.status(200).send({ message: 'hello, world' });
+  router.delete('/:taskID', async (req, res) => {
+    try {
+      if (!req.body) {
+        res.status(400).send({ message: 'body required' });
+      }
+      await dbAccessor.delete({ uuid: req.params.taskID });
+      res.status(200).send({ message: 'delete success' });
+    } catch (err) {
+      console.error(err);
+      res.status(400).send({ message: 'delete failed' });
+    }
   });
 
   return router;
