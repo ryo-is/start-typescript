@@ -9,8 +9,8 @@ export const createRouter = () => {
   // Read
   router.get('/', async (req, res) => {
     try {
-      const data = await dbAccessor.get();
-      res.status(200).send({ message: 'get success', data });
+      const resBody = await dbAccessor.get();
+      res.status(200).send({ message: 'get success', resBody });
     } catch (err) {
       console.error(err);
       res.status(400).send({ message: 'get failed' });
