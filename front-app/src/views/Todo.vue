@@ -6,7 +6,7 @@
       <div class="grid grid-flow-row grid-cols-3">
         <div class="m-4 px-3 py-2 bg-gray-700 rounded-md shadow">
           <div class="flex flex-wrap content-center h-12">
-            <div class="text-left flex-grow-3">
+            <div class="text-left flex-grow-1">
               <input
                 v-model="state.title"
                 type="text"
@@ -24,41 +24,13 @@
             </div>
           </div>
         </div>
-        <div
-          class="m-4 px-3 py-2 bg-gray-700 rounded-md shadow"
+        <todo-item
           v-for="item in state.todos"
           :key="item.uuid"
-        >
-          <div class="flex flex-wrap content-center h-12">
-            <div class="flex-grow-3 text-left">
-              {{ item.title }}
-            </div>
-          </div>
-          <div class="flex flex-wrap content-center text-center h-12">
-            <div
-              class="flex flex-wrap content-center py-1 rounded-md cursor-pointer flex-grow-3 text-gray-100 font-bold justify-center"
-              :class="{
-                'bg-red-500 hover:bg-red-700': item.status === 'todo',
-                'bg-yellow-500 hover:bg-yellow-700': item.status === 'doing',
-                'bg-green-500 hover:bg-green-700': item.status === 'done',
-              }"
-            >
-              {{ item.status }}
-            </div>
-            <div
-              class="py-1 mx-2 text-green-500 rounded-md cursor-pointer flex-grow-1 hover:text-green-700 bg-gray-200 font-bold border-2 border-green-500"
-              @click="updateTodo(item)"
-            >
-              Update
-            </div>
-            <div
-              class="py-1 text-red-500 rounded-md cursor-pointer flex-grow-1 hover:text-red-700 bg-gray-200 font-bold border-2 border-red-500"
-              @click="deleteTodo(item)"
-            >
-              Delete
-            </div>
-          </div>
-        </div>
+          :todo="item"
+          @update="updateTodo"
+          @delete="deleteTodo"
+        ></todo-item>
       </div>
     </div>
   </div>
@@ -67,6 +39,7 @@
 <script lang="ts">
 import { defineComponent, reactive } from 'vue';
 import axios from 'axios';
+import TodoItem from '../components/TodoItem.vue';
 
 const baseURL = 'http://localhost:3000/';
 
@@ -78,6 +51,7 @@ type Todo = {
 
 export default defineComponent({
   name: 'Todo',
+  components: { TodoItem },
   setup() {
     const state = reactive({
       title: '',
