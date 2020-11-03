@@ -7,14 +7,9 @@
     </div>
     <div class="flex flex-wrap content-center text-center h-12">
       <div
-        class="flex flex-wrap content-center py-1 rounded-md cursor-pointer flex-grow-3 text-gray-100 font-bold justify-center"
-        :class="{
-          'bg-red-500 hover:bg-red-700': todo.status === 'todo',
-          'bg-yellow-500 hover:bg-yellow-700': todo.status === 'doing',
-          'bg-green-500 hover:bg-green-700': todo.status === 'done',
-        }"
+        class="flex flex-wrap content-center py-1 rounded-md cursor-pointer flex-grow-3 font-bold justify-center bg-gray-100"
       >
-        {{ todo.status }}
+        <p class="text-gray-700">{{ todo.status }}</p>
       </div>
       <div
         class="py-1 mx-2 text-green-500 rounded-md cursor-pointer flex-grow-1 hover:text-green-700 bg-gray-200 font-bold border-2 border-green-500"
