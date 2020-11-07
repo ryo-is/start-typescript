@@ -2,7 +2,14 @@
   <div class="m-4 px-3 py-2 bg-gray-700 rounded-md shadow">
     <div class="flex flex-wrap content-center h-12">
       <div class="flex-grow-3 text-left">
-        {{ state.task.title }}
+        <div class="text-left flex-grow-1">
+          <input
+            v-model="state.task.title"
+            type="text"
+            class="w-full px-2 py-1 bg-gray-700 border border-gray-400 rounded-md focus:outline-none"
+            placeholder="Title"
+          />
+        </div>
       </div>
     </div>
     <div class="flex flex-wrap content-center text-center h-12">
