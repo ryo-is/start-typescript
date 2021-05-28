@@ -10,14 +10,32 @@
               <input
                 v-model="state.title"
                 type="text"
-                class="w-full px-2 py-1 bg-gray-700 border border-gray-400 rounded-md focus:outline-none"
+                class="
+                  w-full
+                  px-2
+                  py-1
+                  bg-gray-700
+                  border border-gray-400
+                  rounded-md
+                  focus:outline-none
+                "
                 placeholder="Title"
               />
             </div>
           </div>
           <div class="flex flex-wrap content-center justify-end h-12">
             <div
-              class="w-1/4 py-1 text-blue-500 rounded-md cursor-pointer hover:text-blue-700 bg-gray-200 font-bold border-2 border-blue-500"
+              class="
+                w-1/4
+                py-1
+                text-blue-500
+                rounded-md
+                cursor-pointer
+                hover:text-blue-700
+                bg-gray-200
+                font-bold
+                border-2 border-blue-500
+              "
               @click="createTodo"
             >
               Create
@@ -53,7 +71,10 @@ export default defineComponent({
   name: 'Todo',
   components: { TodoItem },
   setup() {
-    const state = reactive({
+    const state = reactive<{
+      title: string;
+      todos: Todo[];
+    }>({
       title: '',
       todos: [],
     });
