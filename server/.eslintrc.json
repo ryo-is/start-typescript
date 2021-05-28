@@ -2,7 +2,7 @@
   "extends": [
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
-    "prettier/@typescript-eslint"
+    "prettier"
   ],
   "env": {
     "browser": true,
@@ -12,6 +12,9 @@
   "parserOptions": {
     "sourceType": "module"
   },
+  "ignorePatterns": [
+    "**/generated/*.ts"
+  ],
   "rules": {
     "@typescript-eslint/no-var-requires": 0,
     "@typescript-eslint/no-empty-interface": 0,

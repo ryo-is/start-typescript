@@ -6,6 +6,10 @@ const dbAccessor = new DBAccessor();
 export const createRouter = () => {
   const router = Router();
 
+  router.get('/healthchack', (req, res) => {
+    res.status(200).send({ message: 'Alive' });
+  });
+
   // Read
   router.get('/', async (req, res) => {
     try {

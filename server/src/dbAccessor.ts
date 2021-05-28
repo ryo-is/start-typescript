@@ -29,8 +29,7 @@ export class DBAccessor {
     const client = await pool.connect();
     try {
       const query = {
-        text:
-          'insert into public."TodoTasks" (uuid, title, "createdAt", "updatedAt") VALUES($1, $2, current_timestamp, current_timestamp)',
+        text: 'insert into public."TodoTasks" (uuid, title, "createdAt", "updatedAt") VALUES($1, $2, current_timestamp, current_timestamp)',
         values: [uuidv4(), title],
       };
       await client.query(query);
@@ -55,8 +54,7 @@ export class DBAccessor {
     const client = await pool.connect();
     try {
       const query = {
-        text:
-          'update public."TodoTasks" set title = $2, status=$3 where uuid = $1',
+        text: 'update public."TodoTasks" set title = $2, status=$3 where uuid = $1',
         values: [uuid, title, status],
       };
       await client.query(query);
