@@ -1,18 +1,18 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <img class="m-auto" alt="Vue logo" src="../assets/logo.png" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import { hello } from '@/graphql';
 
 export default defineComponent({
   name: 'Home',
-  components: {
-    HelloWorld,
+  components: {},
+  setup() {
+    hello();
   },
 });
 </script>

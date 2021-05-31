@@ -7,13 +7,17 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "graphql-codegen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
+    "@apollo/client": "^3.3.19",
     "@tailwindcss/postcss7-compat": "^2.1.2",
     "autoprefixer": "9",
     "axios": "^0.21.1",
     "core-js": "^3.13.0",
+    "graphql": "^15.5.0",
+    "graphql-tag": "^2.12.4",
     "postcss": "7",
     "register-service-worker": "^1.7.2",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2",
@@ -22,6 +26,10 @@
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "1.21.5",
+    "@graphql-codegen/typescript-operations": "1.18.0",
+    "@graphql-codegen/typescript": "1.22.1",
+    "@graphql-codegen/introspection": "1.18.2",
     "@types/jest": "^26.0.23",
     "@typescript-eslint/eslint-plugin": "^4.25.0",
     "@typescript-eslint/parser": "^4.25.0",
