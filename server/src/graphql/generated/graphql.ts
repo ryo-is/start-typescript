@@ -3,7 +3,6 @@ export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -13,21 +12,33 @@ export type Scalars = {
   Float: number;
 };
 
+export type Company = {
+  __typename?: 'Company';
+  department?: Maybe<Array<Maybe<Department>>>;
+  info?: Maybe<Info>;
+};
+
+export type Department = {
+  __typename?: 'Department';
+  name?: Maybe<Scalars['String']>;
+  membersCount?: Maybe<Scalars['Int']>;
+};
+
 export type Hello = {
   __typename?: 'Hello';
   res?: Maybe<Result>;
   func?: Maybe<Scalars['String']>;
 };
 
-
-export type HelloFuncArgs = {
-  t?: Maybe<Scalars['String']>;
+export type Info = {
+  __typename?: 'Info';
+  companyAge?: Maybe<Scalars['Int']>;
 };
 
 export type Query = {
   __typename?: 'Query';
   hello?: Maybe<Hello>;
-  foo?: Maybe<Scalars['String']>;
+  company?: Maybe<Company>;
 };
 
 export type Result = {
@@ -114,33 +125,56 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  Hello: ResolverTypeWrapper<Hello>;
+  Company: ResolverTypeWrapper<Company>;
+  Department: ResolverTypeWrapper<Department>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
+  Hello: ResolverTypeWrapper<Hello>;
+  Info: ResolverTypeWrapper<Info>;
   Query: ResolverTypeWrapper<{}>;
   Result: ResolverTypeWrapper<Result>;
-  Int: ResolverTypeWrapper<Scalars['Int']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  Hello: Hello;
+  Company: Company;
+  Department: Department;
   String: Scalars['String'];
+  Int: Scalars['Int'];
+  Hello: Hello;
+  Info: Info;
   Query: {};
   Result: Result;
-  Int: Scalars['Int'];
   Boolean: Scalars['Boolean'];
+};
+
+export type CompanyResolvers<ContextType = any, ParentType extends ResolversParentTypes['Company'] = ResolversParentTypes['Company']> = {
+  department?: Resolver<Maybe<Array<Maybe<ResolversTypes['Department']>>>, ParentType, ContextType>;
+  info?: Resolver<Maybe<ResolversTypes['Info']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type DepartmentResolvers<ContextType = any, ParentType extends ResolversParentTypes['Department'] = ResolversParentTypes['Department']> = {
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  membersCount?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type HelloResolvers<ContextType = any, ParentType extends ResolversParentTypes['Hello'] = ResolversParentTypes['Hello']> = {
   res?: Resolver<Maybe<ResolversTypes['Result']>, ParentType, ContextType>;
-  func?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, RequireFields<HelloFuncArgs, never>>;
+  func?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type InfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['Info'] = ResolversParentTypes['Info']> = {
+  companyAge?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   hello?: Resolver<Maybe<ResolversTypes['Hello']>, ParentType, ContextType>;
-  foo?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  company?: Resolver<Maybe<ResolversTypes['Company']>, ParentType, ContextType>;
 };
 
 export type ResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['Result'] = ResolversParentTypes['Result']> = {
@@ -150,7 +184,10 @@ export type ResultResolvers<ContextType = any, ParentType extends ResolversParen
 };
 
 export type Resolvers<ContextType = any> = {
+  Company?: CompanyResolvers<ContextType>;
+  Department?: DepartmentResolvers<ContextType>;
   Hello?: HelloResolvers<ContextType>;
+  Info?: InfoResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Result?: ResultResolvers<ContextType>;
 };

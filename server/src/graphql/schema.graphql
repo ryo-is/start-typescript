@@ -1,14 +1,28 @@
 type Query {
   hello: Hello
-  foo: String
+  company: Company
 }
 
 type Hello {
   res: Result
-  func(t: String): String
+  func: String
 }
 
 type Result {
   text: String
   number: Int
+}
+
+type Company {
+  department: [Department]
+  info: Info
+}
+
+type Department {
+  name: String
+  membersCount: Int
+}
+
+type Info {
+  companyAge: Int
 }

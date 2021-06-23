@@ -7,24 +7,46 @@ export const resolvers: Resolvers = {
   Query: {
     hello: async () => {
       console.log(dbAccessor);
-      return {
-        res: {
-          text: 'hello GraphGL !!!!',
-          number: 12345,
-        },
-      };
+      return {};
     },
-    foo: () => {
-      return 'foooooo!!!!!!';
+    company: () => {
+      return {};
     },
   },
   Hello: {
+    res: () => {
+      return {
+        text: 'hello GraphGL !!!!',
+        number: 12345,
+      };
+    },
     func: (p, a, c, i) => {
       console.log('----- parent -----', p);
       console.log('----- args -----', a);
       console.log('----- context -----', c);
       console.log('----- info -----', i);
-      return 'funcdayo' + a.t;
+      return 'funcdayo';
+    },
+  },
+  Company: {
+    department: () => {
+      console.log('----- department -----');
+      return [
+        {
+          name: '総務部',
+          membersCount: 10,
+        },
+        {
+          name: '人事部',
+          membersCount: 5,
+        },
+      ];
+    },
+    info: () => {
+      console.log('----- info -----');
+      return {
+        companyAge: 100,
+      };
     },
   },
 };
