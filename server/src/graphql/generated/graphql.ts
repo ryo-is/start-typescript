@@ -3,6 +3,7 @@ export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -15,6 +16,12 @@ export type Scalars = {
 export type Hello = {
   __typename?: 'Hello';
   res?: Maybe<Result>;
+  func?: Maybe<Scalars['String']>;
+};
+
+
+export type HelloFuncArgs = {
+  t?: Maybe<Scalars['String']>;
 };
 
 export type Query = {
@@ -107,9 +114,9 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Hello: ResolverTypeWrapper<Hello>;
+  String: ResolverTypeWrapper<Scalars['String']>;
   Query: ResolverTypeWrapper<{}>;
   Result: ResolverTypeWrapper<Result>;
-  String: ResolverTypeWrapper<Scalars['String']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
@@ -117,15 +124,16 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Hello: Hello;
+  String: Scalars['String'];
   Query: {};
   Result: Result;
-  String: Scalars['String'];
   Int: Scalars['Int'];
   Boolean: Scalars['Boolean'];
 };
 
 export type HelloResolvers<ContextType = any, ParentType extends ResolversParentTypes['Hello'] = ResolversParentTypes['Hello']> = {
   res?: Resolver<Maybe<ResolversTypes['Result']>, ParentType, ContextType>;
+  func?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, RequireFields<HelloFuncArgs, never>>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

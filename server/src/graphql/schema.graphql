@@ -4,6 +4,7 @@ type Query {
 
 type Hello {
   res: Result
+  func(t: String): String
 }
 
 type Result {

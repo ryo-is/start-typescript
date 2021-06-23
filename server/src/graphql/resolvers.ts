@@ -15,4 +15,13 @@ export const resolvers: Resolvers = {
       };
     },
   },
+  Hello: {
+    func: (p, a, c, i) => {
+      console.log('----- parent -----', p);
+      console.log('----- args -----', a);
+      console.log('----- context -----', c);
+      console.log('----- info -----', i);
+      return 'funcdayo' + a.t;
+    },
+  },
 };
