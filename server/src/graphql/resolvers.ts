@@ -7,7 +7,12 @@ export const resolvers: Resolvers = {
   Query: {
     hello: async () => {
       console.log(dbAccessor);
-      return 'hello GraphGL !!!!';
+      return {
+        res: {
+          text: 'hello GraphGL !!!!',
+          number: 12345,
+        },
+      };
     },
   },
 };

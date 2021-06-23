@@ -12,9 +12,20 @@ export type Scalars = {
   Float: number;
 };
 
+export type Hello = {
+  __typename?: 'Hello';
+  res?: Maybe<Result>;
+};
+
 export type Query = {
   __typename?: 'Query';
-  hello?: Maybe<Scalars['String']>;
+  hello?: Maybe<Hello>;
+};
+
+export type Result = {
+  __typename?: 'Result';
+  text?: Maybe<Scalars['String']>;
+  number?: Maybe<Scalars['Int']>;
 };
 
 
@@ -95,24 +106,43 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
+  Hello: ResolverTypeWrapper<Hello>;
   Query: ResolverTypeWrapper<{}>;
+  Result: ResolverTypeWrapper<Result>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
+  Hello: Hello;
   Query: {};
+  Result: Result;
   String: Scalars['String'];
+  Int: Scalars['Int'];
   Boolean: Scalars['Boolean'];
 };
 
+export type HelloResolvers<ContextType = any, ParentType extends ResolversParentTypes['Hello'] = ResolversParentTypes['Hello']> = {
+  res?: Resolver<Maybe<ResolversTypes['Result']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  hello?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  hello?: Resolver<Maybe<ResolversTypes['Hello']>, ParentType, ContextType>;
+};
+
+export type ResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['Result'] = ResolversParentTypes['Result']> = {
+  text?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  number?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {
+  Hello?: HelloResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  Result?: ResultResolvers<ContextType>;
 };
 
 

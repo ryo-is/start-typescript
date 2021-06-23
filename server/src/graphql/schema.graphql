@@ -1,3 +1,12 @@
 type Query {
-  hello: String
+  hello: Hello
+}
+
+type Hello {
+  res: Result
+}
+
+type Result {
+  text: String
+  number: Int
 }
