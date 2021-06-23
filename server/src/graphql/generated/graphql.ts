@@ -27,6 +27,7 @@ export type HelloFuncArgs = {
 export type Query = {
   __typename?: 'Query';
   hello?: Maybe<Hello>;
+  foo?: Maybe<Scalars['String']>;
 };
 
 export type Result = {
@@ -139,6 +140,7 @@ export type HelloResolvers<ContextType = any, ParentType extends ResolversParent
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   hello?: Resolver<Maybe<ResolversTypes['Hello']>, ParentType, ContextType>;
+  foo?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
 };
 
 export type ResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['Result'] = ResolversParentTypes['Result']> = {

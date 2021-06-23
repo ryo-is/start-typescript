@@ -1,5 +1,6 @@
 type Query {
   hello: Hello
+  foo: String
 }
 
 type Hello {

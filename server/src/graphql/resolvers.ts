@@ -14,6 +14,9 @@ export const resolvers: Resolvers = {
         },
       };
     },
+    foo: () => {
+      return 'foooooo!!!!!!';
+    },
   },
   Hello: {
     func: (p, a, c, i) => {
